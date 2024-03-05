@@ -90,15 +90,18 @@ public class WebElementsExerciseTest {
         String titleGet2 = driver.getTitle();
         String titleExpect2 = "Create New Customer Account";
         Assert.assertEquals(titleGet2,titleExpect2);
-
-
-
     }
 
     @Test
     public void TC04_getPageSourceCode(){
+        driver.get("http://live.techpanda.org/");
+        driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
+        // get page source, compare text in login page
+        System.out.println(driver.getPageSource().contains("Login or Create an Account"));
 
-
+        // get page source, compare text in account page
+        driver.findElement(By.xpath("//span[text()='Create an Account']")).click();
+        System.out.println(driver.getPageSource().contains("Create an Account"));
     }
 
     @AfterClass
