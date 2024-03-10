@@ -13,6 +13,7 @@ import java.time.Duration;
 public class WebElementsExerciseTest {
     WebDriver driver;
 
+
     @BeforeClass
     public void beforeClass() {
         driver = new FirefoxDriver();
@@ -32,7 +33,7 @@ public class WebElementsExerciseTest {
         } else {
             System.out.println("email is not displayed");
         }
-        ;
+
 
         if (driver.findElement(By.cssSelector("textarea#edu")).isDisplayed()) {
             driver.findElement(By.cssSelector("textarea#edu")).sendKeys("Automation Testing");
@@ -40,7 +41,7 @@ public class WebElementsExerciseTest {
         } else {
             System.out.println("edu is not displayed");
         }
-        ;
+
 
         if (driver.findElement(By.cssSelector("input#under_18")).isDisplayed()) {
             driver.findElement(By.cssSelector("input#under_18")).click();
@@ -48,7 +49,7 @@ public class WebElementsExerciseTest {
         } else {
             System.out.println("input#under_18 is not displayed");
         }
-        ;
+
 
         // is not displayed
         if (driver.findElement(By.xpath("//h5[text()='Name: User5']")).isDisplayed()) {
@@ -56,7 +57,6 @@ public class WebElementsExerciseTest {
         } else {
             System.out.println("user 5 text is not displayed");
         }
-        ;
         Assert.assertFalse(driver.findElement(By.xpath("//h5[text()='Name: User5']")).isDisplayed(), "user 5 is displayed");
     }
 
@@ -69,7 +69,6 @@ public class WebElementsExerciseTest {
         } else {
             System.out.println("email is not enabled");
         }
-        ;
         //enabled
         driver.findElement(By.cssSelector("select#job1"));
         driver.findElement(By.cssSelector("select#job2"));
@@ -82,7 +81,7 @@ public class WebElementsExerciseTest {
         } else {
             System.out.println("pass is not enabled");
         }
-        ;
+
         driver.findElement(By.cssSelector("input#radio-disabled"));
         driver.findElement(By.cssSelector("textarea#bio"));
         driver.findElement(By.cssSelector("select#job3"));
@@ -103,14 +102,14 @@ public class WebElementsExerciseTest {
         } else {
             System.out.println("Under 18  radio is not selected");
         }
-        ;
+
 
         if (driver.findElement(By.cssSelector("input#java")).isSelected()) {
             System.out.println("Java checkbox is selected");
         } else {
             System.out.println("Java checkbox is not selected");
         }
-        ;
+
         // unselect java
         driver.findElement(By.cssSelector("input#java")).click();
         if (driver.findElement(By.cssSelector("input#java")).isSelected()) {
@@ -118,7 +117,6 @@ public class WebElementsExerciseTest {
         } else {
             System.out.println("Java checkbox is not selected");
         }
-        ;
     }
 
     @Test

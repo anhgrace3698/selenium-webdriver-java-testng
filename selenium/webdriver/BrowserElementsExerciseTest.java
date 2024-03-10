@@ -73,6 +73,7 @@ public class BrowserElementsExerciseTest {
         String urlExpect2 = "http://live.techpanda.org/index.php/customer/account/create/";
         Assert.assertEquals(urlGet2,urlExpect2);
 
+
         //get back page Login
         driver.navigate().back();
         sleepInSeconds(3);
