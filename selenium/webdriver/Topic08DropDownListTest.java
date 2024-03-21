@@ -14,7 +14,8 @@ import java.util.Random;
 
 public class Topic08DropDownListTest {
     WebDriver driver;
-    String FirstName = "An", LastName = "Nguyen", Email = getRandomMail(), Password = "123456@aA";
+    String FirstName = "An", LastName = "Nguyen", Email = getRandomMail(), Password = "123456@aA", day = "1", month = "May", year = "1980";
+
     @BeforeClass
     public void beforeClass(){
         driver =new FirefoxDriver();
@@ -54,12 +55,39 @@ public class Topic08DropDownListTest {
         sleepInSeconds(1);
 
         Assert.assertEquals(driver.findElement(By.cssSelector("div.result")).getText(),"Your registration completed");
+        sleepInSeconds(3);
 
     }
 
 
     @Test
-    public void TC02_verifyTitle() {
+    public void TC02_Login_Success() {
+        driver.get("https://demo.nopcommerce.com/");
+
+        //Login
+        driver.findElement(By.cssSelector("a.ico-login")).click();
+        driver.findElement(By.id("Email")).sendKeys(Email);
+        System.out.println(Email);
+        driver.findElement(By.id("Password")).sendKeys(Password);
+
+        driver.findElement(By.cssSelector("button.login-button")).click();
+        sleepInSeconds(1);
+
+        //Verify
+        driver.findElement(By.cssSelector("a.ico-account")).click();
+
+        Assert.assertEquals(driver.findElement(By.id("FirstName")).getAttribute("value"),FirstName);
+        Assert.assertEquals(driver.findElement(By.id("LastName")).getAttribute("value"),LastName);
+
+        Select selectedDay = new Select(driver.findElement(By.name("DateOfBirthDay")));
+        Select selectedMonth = new Select(driver.findElement(By.name("DateOfBirthMonth")));
+        Select selectedYear = new Select(driver.findElement(By.name("DateOfBirthYear")));
+
+        Assert.assertEquals(selectedDay.getFirstSelectedOption().getText(),day);
+        Assert.assertEquals(selectedMonth.getFirstSelectedOption().getText(),month);
+        Assert.assertEquals(selectedYear.getFirstSelectedOption().getText(),year);
+
+        Assert.assertEquals(driver.findElement(By.id("Email")).getAttribute("value"),Email);
 
     }
 
@@ -71,7 +99,7 @@ public class Topic08DropDownListTest {
 
     @AfterClass
     public void afterClass(){
-        driver.quit();
+        //driver.quit();
     }
 
     public String getRandomMail() {
