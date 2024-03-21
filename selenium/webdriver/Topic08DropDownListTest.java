@@ -88,7 +88,8 @@ public class Topic08DropDownListTest {
         Assert.assertEquals(selectedYear.getFirstSelectedOption().getText(),year);
 
         Assert.assertEquals(driver.findElement(By.id("Email")).getAttribute("value"),Email);
-
+        // hinh nhu m phat hien 1 loi cho nay. Do la sau khi dang ki tai khoan thi mo http trang login ra -> vao man hinh dang ki -> dien thong tin va dang ki -> thay bao da dang ki roi, moi chon acc khac. ko hieu lam. dien tay thu cong thi lai dc ta
+        // chac la luong nao do m ko biet
     }
 
     @Test
