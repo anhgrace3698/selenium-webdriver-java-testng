@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Topic10CustomDropDownTest {
     WebDriver driver;
-   // String FirstName = "An", LastName = "Nguyen", Email = getRandomMail(), Password = "123456@aA", day = "1", month = "May", year = "1980";
+    // String FirstName = "An", LastName = "Nguyen", Email = getRandomMail(), Password = "123456@aA", day = "1", month = "May", year = "1980";
 
     //learn basic wait - for loop - ...
     WebDriverWait explicitWait; // wait tươờng minh: co trang thai cu the cho elemtn
@@ -23,12 +23,12 @@ public class Topic10CustomDropDownTest {
 
 
     @BeforeClass
-    public void beforeClass(){
-        driver =new FirefoxDriver();
+    public void beforeClass() {
+        driver = new FirefoxDriver();
 
         //khoi tao wait moi: truyen driver va thoi gian doi vao
         // Day la wait  cho elemetn thoa man 1 dieu kien nao do ( // visible/ invisible/ presence/number of element/ clickable/..)
-        explicitWait = new WebDriverWait(driver,Duration.ofSeconds(30));
+        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         // wait ngam dinh: ko ro rang cho 1 trang thai cu the nao cua element,
         //ma ngam dinh cho viec doi element. con elemtn hien thi hyay ko thi ko quan tam
@@ -36,8 +36,9 @@ public class Topic10CustomDropDownTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
     }
+
     @Test
-    public void TC01() {
+    public void TC01_longcode() {
         // 1. click drop down
         // 2.1. display all item
         // 2.2. display a part of items. when you scroll mouse, it is loading more
@@ -61,13 +62,13 @@ public class Topic10CustomDropDownTest {
         List<WebElement> allItems = driver.findElements(By.cssSelector("ul#number-menu div"));
 
         //Dung for each de duyet qua tung item: 1 bien a (type = webelement duyet qua allItems)
-        for (WebElement a: allItems) {
+        for (WebElement a : allItems) {
             // voi TH sau khi click item can thi cac item khac mat -> ham get text se fail
             String textItem = a.getText();
-            System.out.println("text = "+textItem);
+            System.out.println("text = " + textItem);
             // so sanh - neu la string thi dung ham equal; neu la kieu nguyen thuy vd char, float, number thi co the dung ==
             // string dung == ko dc
-            if (textItem.equals("8")){
+            if (textItem.equals("8")) {
                 a.click();
                 break; // = 8 la click luon. tu 9-19 thi thoat vong lap
                 // neu ko break ma van in thi tu 9-19 se ko print ra text, vi sau khi click -> drop down dong roi.
@@ -78,7 +79,14 @@ public class Topic10CustomDropDownTest {
 
 
     @Test
-    public void TC02() {
+    public void TC02_shortCodeUsingFunction() {
+        driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
+
+        // tao ham de linh dong chonj dc cac item khac nhau
+        // giup chon dc nhieu dropdown khac nhau luon
+        clickDropDown("span#number-button", "ul#number-menu div", "8");
+
+        clickDropDown("span#speed-button", "ul#speed-menu div", "Fast");
 
     }
 
@@ -89,10 +97,24 @@ public class Topic10CustomDropDownTest {
 
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
         driver.quit();
     }
 
+
+    public void clickDropDown(String parentCss, String allItemCss, String expectedValue) {
+        driver.findElement(By.cssSelector(parentCss)).click();
+        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(allItemCss)));
+        List<WebElement> allItems = driver.findElements(By.cssSelector(allItemCss)); // co the bo doan nay vi presenceOfAllElementsLocatedBy cung da tra ra lisst roi
+        for (WebElement a : allItems) {
+            String textItem = a.getText();
+            System.out.println("text = " + textItem);
+            if (textItem.equals(expectedValue)) {
+                a.click();
+                break;
+            }
+        }
+    }
 //    public String getRandomMail() {
 //        Random rand_number =new Random();
 //        String email_address;
