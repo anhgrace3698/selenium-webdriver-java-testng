@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -85,8 +86,14 @@ public class Topic10CustomDropDownTest {
         // tao ham de linh dong chonj dc cac item khac nhau
         // giup chon dc nhieu dropdown khac nhau luon
         clickDropDown("span#number-button", "ul#number-menu div", "8");
-
         clickDropDown("span#speed-button", "ul#speed-menu div", "Fast");
+
+        // verify click exact value: kiem tra xem sau khi chon thi element nao dc bat or thay doi, thi verify
+
+        // text can lay o trong span nen phai dung get text() ko dung dc get atribute value
+        Assert.assertEquals(driver.findElement(By.cssSelector("#speed-button>span.ui-selectmenu-text")).getText(),"Fast");
+        Assert.assertEquals(driver.findElement(By.cssSelector("#number-button>span.ui-selectmenu-text")).getText(),"8");
+
 
     }
 
