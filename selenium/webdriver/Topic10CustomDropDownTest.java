@@ -112,6 +112,7 @@ public class Topic10CustomDropDownTest {
             if (textItem.equals(expectedValue)) {
                 a.click();
                 break;
+
             }
         }
     }
