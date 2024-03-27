@@ -84,7 +84,7 @@ public class Topic10CustomDropDownTest {
         driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
 
         // tao ham de linh dong chonj dc cac item khac nhau
-        // giup chon dc nhieu dropdown khac nhau luon
+        // giup chon dc nhieu dropdown khac nhau luo
         clickDropDown("span#number-button", "ul#number-menu div", "8");
         clickDropDown("span#speed-button", "ul#speed-menu div", "Fast");
 
