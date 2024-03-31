@@ -80,7 +80,7 @@ public class Topic10CustomDropDownTest {
 
 
     @Test
-    public void TC02_shortCodeUsingFunction() {
+    public void TC02_shortCodeUsingFunction_jQuery() {
         driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
 
         // tao ham de linh dong chonj dc cac item khac nhau
@@ -93,16 +93,48 @@ public class Topic10CustomDropDownTest {
         // text can lay o trong span nen phai dung get text() ko dung dc get atribute value
         Assert.assertEquals(driver.findElement(By.cssSelector("#speed-button>span.ui-selectmenu-text")).getText(),"Fast");
         Assert.assertEquals(driver.findElement(By.cssSelector("#number-button>span.ui-selectmenu-text")).getText(),"8");
-
-
     }
 
     @Test
-    public void TC03() {
+    public void TC03_ReactJS() {
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
+        clickDropdown2("//div[@class='ui fluid selection dropdown']","div.item>span","Matt");
 
+        //veriy sau khi click
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider")).getText(),"Matt");
     }
 
+    @Test
+    public void TC04_VueJS() {
 
+        driver.get("https://mikerodham.github.io/vue-dropdowns/");
+        clickDropDown("li.dropdown-toggle","ul.dropdown-menu a","Second Option");
+        //veriy sau khi click
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(),"Second Option");
+    }
+    @Test
+    public void TC05_Editable() {
+
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
+        clickDropdown3("input.search","span.text","Belgium");
+        //veriy sau khi click
+        String verifyItem = driver.findElement(By.cssSelector("div.divider")).getText();
+        System.out.println(verifyItem);
+        Assert.assertEquals(verifyItem,"Belgium");
+    }
+
+    @Test
+    public void TC06_NopEcomerce() {
+
+        driver.get("https://demo.nopcommerce.com/register");
+        clickDropDown("select[name='DateOfBirthDay']","select[name='DateOfBirthDay']>option","25");
+        //veriy sau khi click
+        // do sau khi chon ko co element thay doi gia tri nhu cac bai tap tren -> bat bang cach khac
+        // co the dung isSelected cho the option- co select de kiem tra co dc select hay chua
+        Assert.assertTrue(driver.findElement(By.cssSelector("select[name='DateOfBirthDay']>option[value='25']")).isSelected());
+    }
+
+    // khi lam cac du an khac, ngon ngu khac thi can linh dong de tu build ham
     @AfterClass
     public void afterClass() {
         driver.quit();
@@ -119,7 +151,36 @@ public class Topic10CustomDropDownTest {
             if (textItem.equals(expectedValue)) {
                 a.click();
                 break;
+            }
+        }
+    }
 
+    public void clickDropdown2(String parent, String child, String expect){
+        driver.findElement(By.xpath(parent)).click();
+        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(child)));
+        List<WebElement> childItems = driver.findElements(By.cssSelector(child));
+        for (WebElement a: childItems) {
+            String textItem = a.getText();
+            System.out.println("text = " + textItem);
+            if(textItem.equals(expect)){
+                a.click();
+                break;
+            }
+        }
+    }
+
+    public void clickDropdown3(String parent, String child, String expect){
+        driver.findElement(By.cssSelector(parent)).clear();
+        driver.findElement(By.cssSelector(parent)).sendKeys(expect);
+
+        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(child)));
+        List<WebElement> childItems = driver.findElements(By.cssSelector(child));
+        for (WebElement a: childItems) {
+            String textItem = a.getText();
+            System.out.println("text = " + textItem);
+            if(textItem.equals(expect)){
+                a.click();
+                break;
             }
         }
     }
