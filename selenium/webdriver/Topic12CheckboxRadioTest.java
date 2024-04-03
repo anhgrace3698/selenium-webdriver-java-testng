@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class Topic12CheckboxRadioTest {
     WebDriver driver;
-    WebDriverWait explicitWait; // wait tươờng minh: co trang thai cu the cho elemtn
+    WebDriverWait explicitWait;/ // wait tươờng minh: co trang thai cu the cho elemtn
     // visible/ invisible/ presence/number of element/ clickable/..: co trong html nhung ko hien thi
 
 
