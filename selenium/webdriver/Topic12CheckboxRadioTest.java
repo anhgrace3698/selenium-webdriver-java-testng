@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class Topic12CheckboxRadioTest {
     WebDriver driver;
-    WebDriverWait explicitWait;/ // wait tươờng minh: co trang thai cu the cho elemtn
+    WebDriverWait explicitWait;// wait tươờng minh: co trang thai cu the cho elemtn
     // visible/ invisible/ presence/number of element/ clickable/..: co trong html nhung ko hien thi
 
 
@@ -91,6 +91,23 @@ public class Topic12CheckboxRadioTest {
                 Assert.assertTrue(a.isSelected()); // verify da selected all
             }
         }
+    }
+    @Test
+    public void TC05_customCheckboxGoogle() {
+        driver.get("https://docs.google.com/forms/d/e/1FAIpQLSfiypnd69zhuDkjKgqvpID9kwO29UCzeCVrGGtbNPZXQok0jA/viewform");
+
+        // radio can tho
+        By radioCantho = By.cssSelector("div[data-value='Cần Thơ']");
+        //verify chua chon
+        Assert.assertEquals(driver.findElement(radioCantho).getAttribute("aria-checked"),"false");
+        driver.findElement(radioCantho).click();
+        Assert.assertEquals(driver.findElement(radioCantho).getAttribute("aria-checked"),"true");
+
+        //checkbox quang ning
+        By checkboxQuangBinh = By.cssSelector("div[data-answer-value='Quảng Bình']");
+        Assert.assertEquals(driver.findElement(checkboxQuangBinh).getAttribute("aria-checked"),"false");
+        driver.findElement(checkboxQuangBinh).click();
+        Assert.assertEquals(driver.findElement(checkboxQuangBinh).getAttribute("aria-checked"),"true");
     }
 
     @AfterClass
