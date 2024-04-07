@@ -103,7 +103,7 @@ public class Topic12CheckboxRadioTest {
         driver.findElement(radioCantho).click();
         Assert.assertEquals(driver.findElement(radioCantho).getAttribute("aria-checked"),"true");
 
-        //checkbox quang ning
+        //checkbox quang binh
         By checkboxQuangBinh = By.cssSelector("div[data-answer-value='Quảng Bình']");
         Assert.assertEquals(driver.findElement(checkboxQuangBinh).getAttribute("aria-checked"),"false");
         driver.findElement(checkboxQuangBinh).click();
