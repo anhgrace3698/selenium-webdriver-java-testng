@@ -98,18 +98,35 @@ public class Topic13AlertTest {
     }
 
     @Test
-    public void TC04_authenAlert() {
+    public void TC04_authenAlert_bypasstoURL() {
         // thu vien alert ko support case nay - len selenium 4.0 dung Chrome dev tool protocol - chi dung dc voi chrome va edge (chromnium)
         // cach 1 - Truyen thang username/ pass vao url
         //driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
         //Assert.assertEquals(driver.findElement(By.xpath("//p[contains(text(),'Congratulations! You must have the proper credentials.')]")).getText(),"Congratulations! You must have the proper credentials.");
 
         // cach 2 - chi chay dc tren window - dung thu vien auto it de chay
-        driver.get("http://the-internet.herokuapp.com/basic_auth");
+        driver.get("http://the-internet.herokuapp.com/");
+
+        //cach 3 - click vao ra element a _> sang element b - selenium 4
+        String username = "admin";
+        String password = "admin";
+        // lay duong link cua no = cach lay the href
+        String link_expect = driver.findElement(By.xpath("//a[text()='Basic Auth']")).getAttribute("href");
+        System.out.println(link_expect);
+        //driver.get(link_expect); // truy cap link vua lay duoc -> dung regex va split de dua pass va ussername vao link
+
+        //tach link lay duoc thanh 2 phan thong qua // -> luu vao bien
+        String[] link_array = link_expect.split("//");
+        System.out.println(link_array[0]);
+        System.out.println(link_array[1]);
+
+        driver.get(link_array[0]+"//"+username+":"+password+"@"+link_array[1]);
+
     }
     @Test
-    public void TC05_customCheckbox() {
-
+    public void TC05_CDP() {
+        //Chrome Dev Tools - thao tac voi dev tool CPD -> dung cho Chrome, Edge
+        // De lai vi phai cai nhieu thu, sau nay se tim lai sau
     }
 
     @AfterClass
